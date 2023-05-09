@@ -3,7 +3,6 @@ package router
 import (
 	"chat-rooms-server/internal/user"
 	"chat-rooms-server/internal/ws"
-	"fmt"
 	"time"
 
 	"github.com/gin-contrib/cors"
@@ -16,13 +15,12 @@ func InitRouter(userHandler *user.Handler, wsHandler *ws.Handler) {
 	r = gin.Default()
 
 	r.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:3000", "http://127.0.0.1:3000"},
+		AllowOrigins:     []string{"http://localhost:3000", "http://127.0.0.1:3000", "https://chat-rooms-ui-sveltkit-production.up.railway.app"},
 		AllowMethods:     []string{"GET", "POST"},
 		AllowHeaders:     []string{"Content-Type"},
 		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true,
 		AllowOriginFunc: func(origin string) bool {
-			fmt.Println(origin)
 			return origin == "http://localhost:3000" || origin == "http://127.0.0.1:3000" || origin == "https://chat-rooms-ui-sveltkit-production.up.railway.app"
 		},
 		MaxAge: 12 * time.Hour,

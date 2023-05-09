@@ -55,7 +55,7 @@ func (h *Handler) Login(c *gin.Context) {
 		Path:     "/",
 		Expires:  time.Now().Add(time.Duration(expiration)),
 		MaxAge:   expiration,
-		Secure:   false, // Change this to true if you are using HTTPS
+		Secure:   true, // Change this to true if you are using HTTPS
 		HttpOnly: true,
 		SameSite: http.SameSiteStrictMode,
 	}
