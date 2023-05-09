@@ -57,7 +57,7 @@ func (h *Handler) Login(c *gin.Context) {
 		MaxAge:   expiration,
 		HttpOnly: true, 
 		Secure:   true, 
-		SameSite: http.SameSiteNoneMode, 
+		SameSite: http.SameSiteStrictMode, 
 	}
 
 	http.SetCookie(c.Writer, cookie)
