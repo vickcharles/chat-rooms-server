@@ -55,9 +55,9 @@ func (h *Handler) Login(c *gin.Context) {
 		Path:     "/",
 		Expires:  time.Now().Add(time.Duration(expiration)),
 		MaxAge:   expiration,
-		Secure:   true, // Change this to true if you are using HTTPS
-		HttpOnly: true,
-		SameSite: http.SameSiteStrictMode,
+		HttpOnly: true, 
+		Secure:   true, 
+		SameSite: http.SameSiteLaxMode, 
 	}
 
 	http.SetCookie(c.Writer, cookie)
@@ -100,7 +100,7 @@ func (h *Handler) Logout(c *gin.Context) {
 		Path:     "/",
 		Expires:  time.Unix(0, 0),
 		MaxAge:   -1,
-		HttpOnly: false, 
+		HttpOnly: true, 
 		Secure:   true, 
 		SameSite: http.SameSiteLaxMode, 
 	}
