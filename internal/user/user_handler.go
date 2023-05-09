@@ -102,7 +102,7 @@ func (h *Handler) Logout(c *gin.Context) {
 		MaxAge:   -1,
 		HttpOnly: false, 
 		Secure:   true, 
-		SameSite: http.SameSiteStrictMode, 
+		SameSite: http.SameSiteLaxMode, 
 	}
 
 
