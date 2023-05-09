@@ -23,7 +23,7 @@ func InitRouter(userHandler *user.Handler, wsHandler *ws.Handler) {
 		AllowCredentials: true,
 		AllowOriginFunc: func(origin string) bool {
 			fmt.Println(origin)
-			return origin == "http://localhost:3000" || origin == "http://127.0.0.1:3000"
+			return origin == "http://localhost:3000" || origin == "http://127.0.0.1:3000" || origin == "https://chat-rooms-ui-sveltkit-production.up.railway.app"
 		},
 		MaxAge: 12 * time.Hour,
 	}))
