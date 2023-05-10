@@ -58,9 +58,8 @@ func (h *Handler) Login(c *gin.Context) {
 		Path:     "/",
 		Expires:  time.Now().Add(time.Duration(expiration)),
 		MaxAge:   expiration,
-		HttpOnly: true, 
+		HttpOnly: false, 
 		Secure:   true, 
-		SameSite: http.SameSiteNoneMode,
 	}
 
 	http.SetCookie(c.Writer, cookie)
