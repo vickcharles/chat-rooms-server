@@ -12,7 +12,11 @@ import (
 var r *gin.Engine
 
 func InitRouter(userHandler *user.Handler, wsHandler *ws.Handler) {
+	trustedProxies := []string{"127.0.0.1"}
 	r = gin.Default()
+
+	r.SetTrustedProxies(trustedProxies)
+	
 
 	r.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"http://localhost:3000", "http://127.0.0.1:3000","https://chat-rooms-ui-sveltkit.vercel.app", "https://chat-rooms-ui-sveltkit-production.up.railway.app"},
