@@ -31,6 +31,12 @@ func (s *service) CreateUser(c context.Context, req *CreateUserReq) (*CreateUser
 
   defer cancel()
 
+  userbyEmail, _ := s.Repository.GetUserByEmail(ctx, req.Email)
+
+  if userbyEmail.Email != ""  {
+	return nil, fmt.Errorf("user already exists")
+  }
+
   hashedPassword, err := util.HashPassword(req.Password)
 
   if err != nil {
