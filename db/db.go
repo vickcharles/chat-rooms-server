@@ -12,7 +12,7 @@ type Database struct {
 }
 
 func NewDatabase() (*Database, error) {
-  db, error := sql.Open("postgres", "postgresql://postgres:je8hNb7eLKmlFkBrq9Gk@containers-us-west-94.railway.app:5795/railway")
+  db, error := sql.Open("postgres", "postgresql://root:password@localhost:5433/go-chat-db?sslmode=disable")
  if error != nil {
 	return nil, error
  }
