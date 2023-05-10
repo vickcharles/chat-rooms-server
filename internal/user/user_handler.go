@@ -1,6 +1,7 @@
 package user
 
 import (
+	"fmt"
 	"net/http"
 	"strings"
 	"time"
@@ -35,11 +36,13 @@ func (h *Handler) CreateUser(c *gin.Context) {
 }
 
 func (h *Handler) Login(c *gin.Context) {
+	
 	var user LoginUserReq
 	if err := c.ShouldBindJSON(&user); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+	
 
 	u, err := h.Service.Login(c.Request.Context(), &user)
 	if err != nil {
@@ -57,7 +60,7 @@ func (h *Handler) Login(c *gin.Context) {
 		MaxAge:   expiration,
 		HttpOnly: true, 
 		Secure:   true, 
-		SameSite: http.SameSiteNoneMode, 
+		SameSite: http.SameSiteNoneMode,
 	}
 
 	http.SetCookie(c.Writer, cookie)
@@ -66,12 +69,18 @@ func (h *Handler) Login(c *gin.Context) {
 
 func (h *Handler) GetUserInfo(c *gin.Context) {
 	authHeader := c.GetHeader("Authorization")
+	cookie, err := c.Request.Cookie("jwt")
+
+     if err != nil {
+		fmt.Println("cookie",cookie)
+	 } else {
+		fmt.Println("error", err)
+	 }
 
 	if authHeader == "" {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized1"})
 		return
 	}
-
 
 	bearerToken := strings.Split(authHeader, "Bearer ")
 	if len(bearerToken) != 2 {

@@ -6,6 +6,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
+
 type Database struct {
 	db *sql.DB
 }
