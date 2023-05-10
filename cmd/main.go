@@ -30,5 +30,5 @@ func main() {
 	go hub.Run()
 
 	router.InitRouter(userHandler, wsHandler)
-	router.Start("127.0.0.1:" + port)
+	router.Start("0.0.0.0:80" + port)
 }
